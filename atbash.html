@@ -1,0 +1,36 @@
+<html>
+    <script>
+    
+        function atbash(){
+        var str = document.getElementById('text').value.toString().toLowerCase();
+        var output = document.getElementById('output');
+        var alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+        var reverseAlphabet = "zyxwvutsrqponmlkjihgfedcba".split('');
+            
+        var message = "";
+            
+            for(i = 0; i < str.length; i++){
+                let currentLetter = str[i];
+                if(currentLetter === " "){
+                    message += currentLetter;
+                    continue;
+                }
+                
+                var index = alphabet.indexOf(currentLetter);
+                message += reverseAlphabet[index];
+                
+            }
+            output.value = message
+        }
+    </script>
+
+<body>
+
+    <textarea id="text"></textarea><br><br>
+    <button onclick="atbash()">encipher</button><br><br>
+    <textarea id="output"></textarea><br><br>
+
+</body>
+
+
+</html>

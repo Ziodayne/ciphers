@@ -1,0 +1,102 @@
+<html>
+
+<script>
+
+    function encipher(){
+        var str = document.getElementById('text').value.toString().toLowerCase();
+        var output = document.getElementById('output');
+        var shift = parseInt(document.getElementById('shift').value);
+        var alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+        
+        console.log(alphabet);
+        
+        var message = "";
+
+        for(i = 0; i < str.length; i++){
+            console.log(str[i])
+            var currentLetter = str[i];
+            if(currentLetter === " "){
+                message += currentLetter;
+                continue;
+            }            
+
+            console.log(alphabet.indexOf(currentLetter))
+            
+            var index = alphabet.indexOf(currentLetter) + shift;
+            if(index > 25) index -= 26;
+            if(index < 0) index += 26;
+            
+            
+            message += alphabet[index]; 
+        }
+
+        output.value = message;
+
+    }
+    
+     function decipher(){
+        var str = document.getElementById('text2').value.toString().toLowerCase();
+        var output = document.getElementById('output2');
+        var shift = parseInt(document.getElementById('shift2').value);
+        var alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+        
+        
+        var message = "";
+
+        for(i = 0; i < str.length; i++){
+            var currentLetter = str[i];
+            if(currentLetter === " "){
+                message += currentLetter;
+                continue;
+            }            
+
+            var index = alphabet.indexOf(currentLetter) -
+                shift;
+            if(index > 25) index -= 26;
+            if(index < 0) index += 26;
+            
+            
+            message += alphabet[index]; 
+        }
+
+        output.value = message;
+
+    }
+
+
+</script>
+
+
+<body>
+
+    <textarea id="text"></textarea><br><br>
+    
+    <select id="shift">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select><br>
+    <button onclick="encipher()">encipher</button><br><br>
+    <textarea id="output"></textarea><br><br>
+    
+    
+    <textarea id="text2"></textarea><br><br>
+    
+    <select id="shift2">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <button onclick="decipher()">decipher</button><br><br>
+    
+    <textarea id="output2"></textarea>
+    
+    
+
+</body>
+
+</html>
