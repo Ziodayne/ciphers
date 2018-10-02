@@ -1,0 +1,90 @@
+<html>
+
+
+    <script>
+    
+        
+        function encrypt(){
+            
+            var plaintext = (document.getElementById('plaintext').value).toString();
+            var push = parseInt(document.getElementById('push').value);
+            var ciphertext = document.getElementById('ciphertext');
+            
+            var alpha = 'abcdefghijklmnopqrstuvwxyz'.split('');
+            var num = '0123456789'.split('');
+            
+            var hidden_message = "";
+            
+            for(i = 0; i < plaintext.length; i++){
+                
+                if(plaintext[i] === " "){
+                    hidden_message += plaintext[i];
+                    continue;
+                }
+                
+                if(parseInt(plaintext[i])){
+                var currentNumber = parseInt(plaintext[i]);
+                let index_num = (parseInt(num[currentNumber]) + push) % 10;
+                    hidden_message +=  num[index_num];
+                    continue;  
+                }
+                else{
+                var currentLetter = plaintext[i];
+                let index = (alpha.indexOf(currentLetter.toLowerCase()) + push) % 26;
+                    hidden_message += alpha[index];
+                    continue;
+                }
+            }
+            ciphertext.value = hidden_message;
+        }
+        
+        function decrypt(){
+            
+            var message = (document.getElementById('hidden_message').value).toString();
+            var pull = parseInt(document.getElementById('pull').value);
+            var output = document.getElementById('message');
+            
+            var alpha = 'abcdefghijklmnopqrstuvwxyz'.split('');
+            var num = '0123456789'.split('');
+            
+            var hidden_message = "";
+            
+            //decryption cannot handle negative numbers... 
+            
+            for(i = 0; i < message.length; i++){
+                
+                if(message[i] === " "){
+                    hidden_message += message[i];
+                    continue;
+                }
+                
+                if(parseInt(message[i])){
+                var currentNumber = parseInt(message[i]);
+                let index_num = (parseInt(num[currentNumber]) - pull) % 10;
+                    hidden_message +=  num[index_num];
+                    continue;  
+                }
+                else{
+                var currentLetter = message[i];
+                let index = (alpha.indexOf(currentLetter) - pull) % 26;
+                    hidden_message += alpha[index];
+                    continue;
+                }
+            }
+            output.value = hidden_message;
+        }
+    </script>
+
+
+    <input id="plaintext"><br>
+    <input id="push"><br>
+    <button onclick="encrypt()">encrypt</button><br>
+    <input id="ciphertext"><br>
+    <br>
+    <input id="hidden_message"><br>
+    <input id="pull"><br>
+    <button onclick="decrypt()">decrypt</button><br>
+    <input id="message"><br>
+    
+
+</html>
