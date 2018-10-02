@@ -2,7 +2,8 @@
 
 
     <script>
-    
+        
+        //functions treat '0' like an 'a'
         
         function encrypt(){
             
@@ -38,6 +39,8 @@
             ciphertext.value = hidden_message;
         }
         
+        // function cannot handle large numbers
+        
         function decrypt(){
             
             var message = (document.getElementById('hidden_message').value).toString();
@@ -49,8 +52,6 @@
             
             var hidden_message = "";
             
-            //decryption cannot handle negative numbers... 
-            
             for(i = 0; i < message.length; i++){
                 
                 if(message[i] === " "){
@@ -60,14 +61,14 @@
                 
                 if(parseInt(message[i])){
                 var currentNumber = parseInt(message[i]);
-                let index_num = (parseInt(num[currentNumber]) - pull) % 10;
-                    hidden_message +=  num[index_num];
+                let index_num = (parseInt(num[currentNumber]) - pull);
+                    hidden_message +=  (index_num < 0) ? num[index_num + 10] : num[index_num];
                     continue;  
                 }
                 else{
                 var currentLetter = message[i];
-                let index = (alpha.indexOf(currentLetter) - pull) % 26;
-                    hidden_message += alpha[index];
+                let index = (alpha.indexOf(currentLetter) - pull);
+                    hidden_message += (index < 0 ) ? alpha[index + 26] : alpha[index];
                     continue;
                 }
             }
