@@ -23,7 +23,7 @@
                     continue;
                 }
                 
-                if(parseInt(plaintext[i])){
+                if(parseInt(plaintext[i]) || plaintext[i] == "0"){
                 var currentNumber = parseInt(plaintext[i]);
                 let index_num = (parseInt(num[currentNumber]) + push) % 10;
                     hidden_message +=  num[index_num];
@@ -59,13 +59,15 @@
                     continue;
                 }
                 
-                if(parseInt(message[i])){
+                if(parseInt(message[i]) || message[i] == "0"){
+                    console.log("number is: " + message[i]);
                 var currentNumber = parseInt(message[i]);
                 let index_num = (parseInt(num[currentNumber]) - pull);
                     hidden_message +=  (index_num < 0) ? num[index_num + 10] : num[index_num];
                     continue;  
                 }
                 else{
+                console.log("number is: " + message[i]);
                 var currentLetter = message[i];
                 let index = (alpha.indexOf(currentLetter) - pull);
                     hidden_message += (index < 0 ) ? alpha[index + 26] : alpha[index];
